@@ -1,0 +1,69 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <div class="row mt-3">
+        <div class="col-8 offset-2">
+            <h3>Edit your Listing</h3>
+            <!-- Form Validations : When we enter data in the form, the browser and/or the web server will check to see the data
+                                    is in the correct format and within the constraints set by the apllication. -->
+            <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" enctype="multipart/form-data" novalidate> <!-- novalidate : For custom Bootstrap form validation messages, you’ll need to add the novalidate boolean attribute to your <form> tage , this disables the browser default feedback tooltips of that 'required' keyword -->
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" id="title" name="listing[title]" class="form-control" value="<%= listing.title %>" required>
+                    <div class="valid-feedback"> Title looks good! </div>
+                    <div class="invalid-feedback"> Please eneter a Title</div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]" id="description" class="form-control" required><%= listing.description %></textarea>
+                    <div class="valid-feedback"> Description looks good! </div>
+                    <div class="invalid-feedback"> Please enter a short description</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="category" name="listing[category]"  aria-label="Floating label select example" required>
+                        <option selected><%= listing.category %></option>
+                        <option>Trending</option>
+                        <option>Rooms</option>
+                        <option>City</option>
+                        <option>Mountains</option>
+                        <option>Castle</option>
+                        <option>Pools</option>
+                        <option>Camping</option>
+                        <option>Farms</option>
+                        <option>Arctic</option>
+                        <option>Domes</option>
+                        <option>Boats</option>
+                    </select>
+                    <label for="category" class="label-style">select category</label>
+                    <div class="invalid-feedback"> Category should be mandotory</div>
+                </div>
+                <div class="mb-3">
+                    Original Image Url <br>
+                    <img src="<%= originalImageUrl %>" alt="img" width="70%">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload New Image</label>
+                    <input type="file" id="image" name="listing[image]" class="form-control">
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input id="price" name="listing[price]" value="<%= listing.price %>" class="form-control" required>
+                        <div class="invalid-feedback"> Price should be valid</div>
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" id="country" name="listing[country]" value="<%= listing.country %>" class="form-control" required>
+                        <div class="invalid-feedback"> Country should be valid</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" id="location" name="listing[location]" value="<%= listing.location %>" class="form-control" required>
+                    <div class="invalid-feedback"> Location should be valid</div>
+                </div>
+                <button class="btn btn-dark edit-btn mt-3">Edit</button>
+                <br><br>
+            </form>
+        </div>
+    </div>
+</body>

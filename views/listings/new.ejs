@@ -1,0 +1,66 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <div class="row mt-3">
+        <div class="col-8 offset-2"> <!-- Offset-2 means margin-left -->
+            <h3>Create a New Listing</h3>
+            <!-- Form Validations : When we enter data in the form, the browser and/or the web server will check to see the data
+                                    is in the correct format and within the constraints set by the apllication. -->
+            <form method="POST" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data"> <!-- enctype="multipart/form-data"  : The 'enctype' attribute specifies how the form-data should be encoded when submitting it to the server,select 'multipart/form-data' => if the user will upload a file through the form -->
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" id="title" name="listing[title]" class="form-control" placeholder="Add a catchy title" required>
+                    <div class="valid-feedback"> Title looks good! </div>
+                    <div class="invalid-feedback"> Please eneter a Title</div>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea id="description" name="listing[description]" class="form-control" required></textarea>
+                    <div class="valid-feedback"> Description looks good! </div>
+                    <div class="invalid-feedback"> Please enter a short description</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="category" name="listing[category]" aria-label="Floating label select example" required>
+                        <option selected></option>
+                        <option>Trending</option>
+                        <option>Rooms</option>
+                        <option>City</option>
+                        <option>Mountains</option>
+                        <option>Castle</option>
+                        <option>Pools</option>
+                        <option>Camping</option>
+                        <option>Farms</option>
+                        <option>Arctic</option>
+                        <option>Domes</option>
+                        <option>Boats</option>
+                    </select>
+                    <label for="category" class="label-style">select category</label>
+                    <div class="invalid-feedback"> Category should be mandotory</div>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload Listing Image</label>
+                    <input id="image" type="file" name="listing[image]" class="form-control" required>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input id="price" name="listing[price]" placeholder="1200" class="form-control" required>
+                        <div class="invalid-feedback"> Price should be valid</div>
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-label">Country</label>
+                        <input id="country" type="text" name="listing[country]" placeholder="India" class="form-control" required>
+                        <div class="invalid-feedback"> Country should be valid</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input id="location" type="text" name="listing[location]" placeholder="Jaipur, Rajasthan" class="form-control" required>
+                    <div class="invalid-feedback"> Location should be valid</div>
+                </div>
+
+                <button class="btn btn-dark add-btn mt-3">Add</button>
+                <br><br>
+            </form>
+        </div>
+    </div>
+</body>

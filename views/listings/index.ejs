@@ -1,0 +1,129 @@
+<% layout("/layouts/boilerplate") %>
+<body> 
+    <div class="filters">
+        <a href="/listings" class="filter" id="filter-icons">
+            <div><i class="fa-solid fa-icons"></i></div>
+            <p>Icons</p>
+        </a>
+        <a href="/listings?category=Trending" class="filter" id="filter-one">
+            <div><i class="fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </a>
+        <a href="/listings?category=Rooms" class="filter" id="filter-two">
+            <div><i class="fa-solid fa-bed"></i></div>
+            <p>Rooms</p>
+        </a>
+        <a href="/listings?category=City" class="filter" id="filter-three">
+            <div><i class="fa-solid fa-mountain-city"></i></div>
+            <p>Iconic cities</p>
+        </a>
+        <a href="/listings?category=Mountains" class="filter" id="filter-four">
+            <div><i class="fa-solid fa-mountain"></i></div>
+            <p>Mountains</p>
+        </a>
+        <a href="/listings?category=Castle" class="filter" id="filter-five">
+            <div><i class="fa-solid fa-fort-awesome"></i></div>
+            <p>Castles</p>
+        </a>
+        <a href="/listings?category=Pools" class="filter" id="filter-six">
+            <div><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Amazing Pools</p>
+        </a>
+        <a href="/listings?category=Camping" class="filter" id="filter-seven">
+            <div><i class="fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </a>
+        <a href="/listings?category=Farms" class="filter" id="filter-eight">
+            <div><i class="fa-solid fa-cow"></i></div>
+            <p>Farms</p>
+        </a>
+        <a href="/listings?category=Arctic" class="filter" id="filter-nine">
+            <div><i class="fa-solid fa-snowflake"></i></div>
+            <p>Arctic</p>
+        </a>
+        <a href="/listings?category=Domes" class="filter" id="filter-ten">
+            <div><i class="fa-solid fa-igloo"></i></div>
+            <p>Domes</p>
+        </a>
+        <a href="/listings?category=Boats" class="filter" id="filter-eleven">
+            <div><i class="fa-solid fa-ship"></i></div>
+            <p>Boats</p>
+        </a>
+        <div class="tax-toggle">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+              </div>
+        </div>
+    </div>
+    
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+        <% for(let listing of allListings) { %>
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+            <div class="card listing-card">
+                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <b><%= listing.title %></b> <br>
+                        &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+                        <i class="tax-info"> &nbsp;&nbsp; +18% GST</i>
+                    </p>
+                </div>
+            </div>
+        </a>
+        <% } %>
+    </div>
+
+    <script>
+        let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+        taxSwitch.addEventListener("click",() =>{
+            let taxInfo = document.getElementsByClassName("tax-info");
+            for(info of taxInfo){
+                if(info.style.display != "inline")
+                {
+                    info.style.display = "inline";
+                } else{
+                    info.style.display = "none";
+                }
+            }
+        });
+
+
+        // switching the tab
+        document.addEventListener('DOMContentLoaded', function() {
+            const filters = document.querySelectorAll('.filter');
+
+            // Function to set active filter based on current URL path
+            function setActiveFilter() {
+                const currentPath = window.location.pathname + window.location.search;
+                filters.forEach(filter => {
+                    const filterPath = filter.getAttribute('href');
+                    if (filterPath === currentPath) {
+                        filter.classList.add('active');
+                    } else {
+                        filter.classList.remove('active');
+                    }
+                });
+            }
+
+            // Set the active filter when the page loads
+            setActiveFilter();
+
+            // Add a click event listener to each filter
+            filters.forEach(filter => {
+                filter.addEventListener('click', function() {
+                    // Remove the 'active' class from all filters
+                    filters.forEach(f => f.classList.remove('active'));
+
+                    // Add the 'active' class to the clicked filter
+                    this.classList.add('active');
+
+                    // Store the active filter id in localStorage
+                    localStorage.setItem('activeFilter', this.id);
+                });
+            });
+        });
+    </script>
+
+</body>
