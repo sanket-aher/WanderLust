@@ -4,7 +4,7 @@ const ExpressError = require("./utils/ExpressError.js"); // throw custom error
 const {listingSchema,reviewSchema} = require("./schema.js"); // Joi Validation for Listing Schema, Review Schema , if any data try to insert from hoppscotch.io or postman
 
 module.exports.isLoggedIn = (req,res,next)=>{
-    console.log(req.user); // passport store user information
+    //console.log(req.user); // passport store user information
     if(!req.isAuthenticated()) //req.isAuthenticated() : it is an passport package method and will return true if user is logged in
     {
         req.session.redirectUrl = req.originalUrl;  // redirectUrl save

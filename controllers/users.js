@@ -11,7 +11,7 @@ module.exports.signup = async(req,res)=>{
 
         //register() : Convenience method to register a new user instance with a given password. Checks if username is unique.
         const registeredUser = await User.register(newUser,password);
-        console.log(registeredUser);
+        //console.log(registeredUser);
 
         //After signup user will automatically login
         req.login(registeredUser,(err) =>{  // req.login : It is an passport method.

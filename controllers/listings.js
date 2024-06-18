@@ -73,7 +73,7 @@ module.exports.createListing = async (req,res,next)=>{
         // let {title,description,image,price,country,location,category}=req.body;
                 //OR
         let data = req.body.listing;
-          console.log(data);
+        //console.log(data);
 
         let url = req.file.path;
         let filename = req.file.filename;
